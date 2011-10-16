@@ -9,6 +9,6 @@ done
 cat dates.csv| grep -e ',.*,' > dates-cleaner.csv
 
 rm dates-posix.csv
-for d in `head dates-cleaner.csv|tr , -`
+for d in `cat dates-cleaner.csv|tr , -`
   do date -d $d +%s >> dates-posix.csv
 done
