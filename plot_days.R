@@ -8,11 +8,15 @@ fromcsv<-function () {
 
 fromposix<-function () {
   stops.messy<-table(read.csv('dates-posix.csv',header=F)$V1)
-  stops<-stops.messy[stops.messy>0]
-  day<-as.POSIXlt(names(stops),origin='1970-1-1')
+  stops<-unlist(stops.messy[
+    stops.messy>0
+  ])
+#  & as.numeric(names(stops.messy))<as.numeric(strptime('2010-01-01',format='%Y-%m-%d'))
+#  ]
+  day<-as.POSIXlt(as.numeric(names(stops)),origin='1970-01-01',tz="EST")
   
   pdf(width=85,height=11)
-  plot(stops~day
+  plot(day,stops
   , type='l',axes=F
   , ylab="Stops per day"
   , xlab="Day"
@@ -20,4 +24,5 @@ fromposix<-function () {
   )
   axis(1);axis(2)
   dev.off()
+  stops
 }
