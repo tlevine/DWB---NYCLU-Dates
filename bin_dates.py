@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Export dates to a consistant format. No user input required."""
 from export_dates import fromfile
+from json import dumps
 
 def increment(d,key):
   if not key in d.keys():
@@ -8,15 +9,18 @@ def increment(d,key):
   d[key]=d[key]+1
 
 def main():
-  from json import dumps
-  d=extract()
+  for year in range(2003,2011):
+    year=year
+    d=extract(year=year)
+    'Finished extracting'
+    tofile(d,str(year))
 
-def tofile(d): 
+def tofile(d,year='all'): 
   #CSV
   print 'Making csv files'
   for interval in ('hours','days'):
-    f=open('datetime_bins-%s.csv' % interval,'w+')
-    f.write('interval,count')
+    f=open('datetime_bins/%s-%s.csv' % (year,interval),'w+')
+    f.write(interval+',count\n')
     for key in d[interval]:
       f.write('%d,%d\n' % (key,d[interval][key]))
     f.close()
@@ -24,7 +28,7 @@ def tofile(d):
   #JSON
   print 'Making a json file'
   json=dumps(d)
-  f=open('datetime_bins.json','w')
+  f=open('datetime_bins/%s.json' % year,'w')
   f.write(json)
   f.close()
 

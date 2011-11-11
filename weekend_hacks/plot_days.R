@@ -1,5 +1,5 @@
-fromcsv<-function () {
-  days<-read.csv('dates-cleaner.csv')
+fromcsv<-function (filename) {
+  days<-read.csv(filename)
   h<-hist((356*days$year)+(days$month-1)*30+days$day,plot=F,breaks=363*7)
   pdf(width=85,height=11)
   plot(h$counts~h$mids,type='l',axes=F,ylab="Stops per day",xlab="Day");axis(1);axis(2)
