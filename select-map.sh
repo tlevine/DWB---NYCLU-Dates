@@ -1,6 +1,12 @@
 #!/bin/bash
-slice=$1 #A csv file
+csv=$1 #A csv file
 
 #Extract the time information
-slice_times="`echo $slice|sed s/\.csv/-times.csv/`"
-cut -d , -f 4-5 $slice > $slice_times
+csv_times="`echo $csv|sed s/\.csv/-times.csv/`"
+cut -d , -f 4-5 $csv > $csv_times
+
+#Remove header if there is one
+stop=`sed -n '1 p' $csv_times|grep -i --only-matching stop|tr A-Z a-z`
+if [ "$stop" != "" ]
+  then sed -i '1 d' $csv_times
+fi
