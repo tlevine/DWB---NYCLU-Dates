@@ -8,8 +8,8 @@ def main():
   from sys import argv
   infile=argv[1]
   outfile=argv[3]
-  year=argv[2]
-  
+  year=int(argv[2])
+  print infile,year,outfile
   dts=fromfile(infile,year)
   tofile(dts,outfile)
 
@@ -44,3 +44,4 @@ if __name__ == "__main__":
   #print fromfile('data/2004/slice_014-times.csv',2004)
   #dts=fromfile('data/2004/slice_014-times.csv',2004)
   #tofile(dts,'foo.json')
+  main()
