@@ -3,6 +3,16 @@
 from parse_dates import parse_line
 from json import dumps
 
+def main():
+  """Export dates for a particular file."""
+  from sys import argv
+  infile=argv[1]
+  outfile=argv[3]
+  year=argv[2]
+  
+  dts=fromfile(infile,year)
+  tofile(dts,outfile)
+
 class InvalidFileFormat(Exception):
   pass
 
@@ -32,5 +42,5 @@ def tofile(dts,filename,fileformat='json',timeformat='%s'):
 if __name__ == "__main__":
   #print fromfile('data/2004/slice_014-times.csv',2004,keys=True)
   #print fromfile('data/2004/slice_014-times.csv',2004)
-  dts=fromfile('data/2004/slice_014-times.csv',2004)
-  tofile(dts,'foo.json')
+  #dts=fromfile('data/2004/slice_014-times.csv',2004)
+  #tofile(dts,'foo.json')
