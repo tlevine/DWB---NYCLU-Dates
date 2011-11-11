@@ -34,16 +34,16 @@ import<-function(){
 
 plot_sqf<-list(
   typical_week=function(sqf,year=NA){
-    if (!is.na(year)){
-      sqf$dfs$hours<-subset(
-        sqf$dfs$hours
-      , strftime(interval,format='%Y')==as.character(year)
-      )
-    } else if (length(year)==2) {
+    if (length(year)==2) {
       years<-as.numeric(strftime(sqf$dfs$hours$interval,format='%Y'))
       sqf$dfs$hours<-subset(
         sqf$dfs$hours
       , years>year[1]&years<year[2]
+      )
+    } else if (!is.na(year)){
+      sqf$dfs$hours<-subset(
+        sqf$dfs$hours
+      , strftime(interval,format='%Y')==as.character(year)
       )
     }
     foo<-strftime(sqf$dfs$hours$interval,format='%a %H:00')
@@ -59,7 +59,11 @@ plot_sqf<-list(
       , labels=baz$hour[labelsep]
       ) +
       geom_line() + ylab("Stops per hour")
-    if (is.na(year)){
+    if (length(year)==2){
+      partial_plot+xlab(paste(
+        'The average week from',year[1],'to',year[2]
+      ))
+    } else if (is.na(year)){
       partial_plot+xlab("The average week across the whole dataset")
     } else {
       partial_plot+xlab(paste('The average week in',year))
