@@ -19,7 +19,8 @@ def main():
 
   #CSV
   for interval in ('hours','days'):
-    f=open('datetime_bins-%s.csv' % interval,'+')
+    f=open('datetime_bins-%s.csv' % interval,'w+')
+    f.write('interval,count')
     for key in d[interval]:
       f.write('%d,%d' % (key,d[interval][key])
     f.close()
