@@ -77,8 +77,11 @@ def parse_date_050910(raw):
 
 def parse_date_06(raw):
   l=raw.split('-')
-  l.reverse()
-  mmddyyyy=''.join(l)
+  if len(l)==3:
+    mmddyyyy='%s%s%s' % (l[1],l[2],l[0])
+  else:
+    print 'No date at "%s".'
+    mmddyyyy=None
   return mmddyyyy
 
 def parse_date_0708(raw):
