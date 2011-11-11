@@ -29,14 +29,21 @@ def parse_datetime(raw,year):
   else:
     print 'fail'
 
-  return datetime_fromstring(mmddyyyy,hhmm)
+  try:
+    return datetime_fromstring(mmddyyyy,hhmm)
+  except:
+    print raw
+    raise
 
 def datetime_fromstring(mmddyyyy,hhmm):
   """Create a datetime object with the appropriate time zone
   from two strings."""
-  month=int(mmddyyyy[0:2])
-  day=int(mmddyyyy[2:4])
-  year=int(mmddyyyy[4:8])
+  try:
+    month=int(mmddyyyy[0:2])
+    day=int(mmddyyyy[2:4])
+    year=int(mmddyyyy[4:8])
+  except:
+    return None
 
   hour=int(hhmm[0:2])
   minute=int(hhmm[2:4])

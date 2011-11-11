@@ -2,7 +2,7 @@
 csv=$1 #A csv file
 
 #Extract the time information
-csv_times="`echo $csv|sed s/\.csv/-times.csv/`"
+csv_times="`echo $csv|sed s/\.csv/-rawtimes.csv/`"
 cut -d , -f 4-5 $csv > $csv_times
 
 #Remove header if there is one

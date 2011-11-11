@@ -2,7 +2,7 @@
 
 if [ "" = "$1" ]
 #  then files=data/20[01][0-9]/slice_[0-9]*.csv
-  then files='data/*.csv'
+  then files='data/[0-9]*.csv'
 else
   files="$1"
 fi

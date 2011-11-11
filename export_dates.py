@@ -23,6 +23,9 @@ def fromfile(filename,year,keys=True):
   out=[]
   for line in csv:
     dtval=parse_line(line,year)
+    if None==dtval:
+      print 'No date'
+      continue
     if keys:
       out.append({"key":line,"value":dtval})
     else:
