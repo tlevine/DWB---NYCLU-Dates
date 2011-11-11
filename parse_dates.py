@@ -77,6 +77,3 @@ def split_time(dateline,year):
     "date":date
   , "time":time
   }
-
-if __name__ == "__main__":
-  testyears()
