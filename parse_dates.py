@@ -40,6 +40,11 @@ def datetime_fromstring(mmddyyyy,hhmm):
 
   hour=int(hhmm[0:2])
   minute=int(hhmm[2:4])
+  if not (hour in range(0,24) and minute in range(0,60)):
+    print 'Invalid hour or minute for hhmm="%s". Using midnight' % hhmm
+    hour=0
+    minute=0
+
   return datetime(year,month,day,hour,minute,tzinfo=timezone('EST'))
 
 def parse_time_030405(raw):
@@ -47,7 +52,13 @@ def parse_time_030405(raw):
   return '0000'
 
 def parse_time_0607080910(raw):
-  return raw
+  try:
+    hhmm='%04d' % int(raw)
+  except:
+    #In case of an error, use midnight
+    print '"%s" is not a valid time, so I\'m using midnight' % raw
+    hhmm='0000'
+  return hhmm
 
 def parse_date_0304(raw):
   mmddyyyy=raw.replace('"','')
