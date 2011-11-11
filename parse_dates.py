@@ -1,16 +1,27 @@
 #!/usr/bin/env python
 
-def test():
+def test(year):
   csv=open('times_head.csv')
   for line in csv:
-    print line
+    print parse_line(line,year)
+    return None
 
 def parse_line(line,year):
   """Parse the date and time from a raw line of
   the csv file for a given year."""
+  raw=split_time(line,year)
+  return parse_date(raw,year)
 
-def split_time(dateline):
-  if year<=2005:
+def parse_date(raw,year):
+  if year in (2003,2004):
+    return parse_date_0304(raw)
+
+def parse_date_0304(d):
+  return d
+
+def split_time(dateline,year):
+  """Split the time into a dict of year and time."""
+  if year in (2003,2004,2005):
     time,date=dateline.split(',')
   else:
     date,time=dateline.split(',')
@@ -19,8 +30,5 @@ def split_time(dateline):
   , "time":time
   }
 
-def parse_time_0304(dateline):
-  pass
-
 if __name__ == "__main__":
-  test()
+  test(2003)
