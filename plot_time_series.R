@@ -46,11 +46,11 @@ plot_sqf<-list(
       , strftime(interval,format='%Y')==as.character(year)
       )
     }
-    foo<-strftime(sqf$dfs$hours$interval,format='%a %H:00')
+    foo<-strftime(sqf$dfs$hours$interval,format='%w %a %H:00')
     bar<-sqf$dfs$hours$count 
     baz<-aggregate(bar,list(foo),mean)
     names(baz)<-c('hour','count')
-    labelsep<-seq(1,nrow(baz),12)
+    labelsep<-seq(1,nrow(baz),nrow(baz)/14)
     baz$index=1:nrow(baz)
 
     partial_plot<- ggplot(baz,aes(index,count)) +
@@ -86,11 +86,11 @@ sqf<-import()
 go<-function(){
   pdf('sqf.pdf',width=17,height=11)
   plot_sqf$days(sqf)
-  print(plot_sqf$typical_week(sqf,c(2003,2005))+ylim(0,200))
-  print(plot_sqf$typical_week(sqf,c(2006,2010))+ylim(0,200))
+  print(plot_sqf$typical_week(sqf,c(2003,2005))+ylim(0,1500))
   for (year in 2003:2005){
     print(plot_sqf$typical_week(sqf,year)+ylim(0,1500))
   }
+  print(plot_sqf$typical_week(sqf,c(2006,2010))+ylim(0,200))
   for (year in 2006:2010){
     print(plot_sqf$typical_week(sqf,year)+ylim(0,200))
   }
