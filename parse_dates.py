@@ -34,16 +34,22 @@ def parse_datetime(raw,year):
   else:
     print 'fail'
 
+  print datetime_fromstring(mmddyyyy,hhmm)
 
-  print mmddyyyy,hhmm
+def datetime_fromstring(mmddyyyy,hhmm):
+  """Create a datetime object with the appropriate time zone
+  from two strings."""
+  month=int(mmddyyyy[0:2])
+  day=int(mmddyyyy[2:4])
+  year=int(mmddyyyy[4:8])
 
-  #Time zone
-  #year,month,day,hour,minute=d
-  year,month,day,hour,minute=[2004,3,5,3,1]
+  hour=int(hhmm[0:2])
+  minute=int(hhmm[2:4])
   return datetime(year,month,day,hour,minute,tzinfo=timezone('EST'))
 
 def parse_time_030405(raw):
-  return raw
+  """Let's put in a dummy time because I don't know how it works."""
+  return '0000'
 
 def parse_time_0607080910(raw):
   return raw
@@ -63,8 +69,7 @@ def parse_date_06(raw):
   return mmddyyyy
 
 def parse_date_0708(raw):
-  mmddyyyy=raw
-  return mmddyyyy
+  return raw
 
 def split_time(dateline,year):
   """Split the time into a dict of year and time."""
