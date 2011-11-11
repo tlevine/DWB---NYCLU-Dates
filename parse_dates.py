@@ -47,6 +47,11 @@ def datetime_fromstring(mmddyyyy,hhmm):
 
   hour=int(hhmm[0:2])
   minute=int(hhmm[2:4])
+
+  if (hour in range(0,30)):
+    #Handle after-midnight times
+    hour=hour % 24
+
   if not (hour in range(0,24) and minute in range(0,60)):
     print 'Invalid hour or minute for hhmm="%s". Using midnight' % hhmm
     hour=0
