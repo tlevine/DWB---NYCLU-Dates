@@ -11,3 +11,6 @@ I also cleaned all of the dates. Here's how you run that.
 The resulting dates are in `data/*-cleantimes.json`.
 The "key" refers is the raw time, and the "value" is
 the cleaned time.
+
+If you want to use these clean dates in another file, you may find
+[these tables](http://thomaslevine.com/sqf-dates.tar.gz) convenient.
