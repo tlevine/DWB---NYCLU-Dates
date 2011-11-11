@@ -33,16 +33,22 @@ def parse_date(raw,year):
   return datetime(year,month,day,hour,minute,tzinfo=timezone('EST'))
 
 def parse_date_0304(d):
-  return d
+  mmddyyyy=d['date'].replace('"','')
+  return mmddyyyy
 
 def parse_date_050910(d):
-  return d
+  mmddyyyy='%08d' % int(d['date'])
+  return mmddyyyy
 
 def parse_date_06(d):
-  return d
+  l=d['date'].split('-')
+  l.reverse()
+  mmddyyyy=''.join(l)
+  return mmddyyyy
 
 def parse_date_0708(d):
-  return d
+  mmddyyyy=d['date']
+  return mmddyyyy
 
 def split_time(dateline,year):
   """Split the time into a dict of year and time."""
