@@ -11,43 +11,59 @@ def parse_line(line,year):
   """Parse the date and time from a raw line of
   the csv file for a given year."""
   raw=split_time(line,year)
-  return parse_date(raw,year)
+  return parse_datetime(raw,year)
 
-def parse_date(raw,year):
+def parse_datetime(raw,year):
+  #Date
   if year in (2003,2004):
-    d=parse_date_0304(raw)
+    mmddyyyy=parse_date_0304(raw['date'])
   elif year in (2005,2009,2010):
-    d=parse_date_050910(raw)
+    mmddyyyy=parse_date_050910(raw['date'])
   elif year==2006:
-    d=parse_date_06(raw)
+    mmddyyyy=parse_date_06(raw['date'])
   elif year in (2007,2008):
-    d=parse_date_0708(raw)
+    mmddyyyy=parse_date_0708(raw['date'])
   else:
     print 'fail'
 
-  print d
+  #Time
+  if year in (2003,2004,2005):
+    hhmm=parse_time_030405(raw['time'])
+  elif year in (2005,2006,2007,2008,2009,2010):
+    hhmm=parse_time_0607080910(raw['time'])
+  else:
+    print 'fail'
+
+
+  print mmddyyyy,hhmm
 
   #Time zone
   #year,month,day,hour,minute=d
   year,month,day,hour,minute=[2004,3,5,3,1]
   return datetime(year,month,day,hour,minute,tzinfo=timezone('EST'))
 
-def parse_date_0304(d):
-  mmddyyyy=d['date'].replace('"','')
+def parse_time_030405(raw):
+  return raw
+
+def parse_time_0607080910(raw):
+  return raw
+
+def parse_date_0304(raw):
+  mmddyyyy=raw.replace('"','')
   return mmddyyyy
 
-def parse_date_050910(d):
-  mmddyyyy='%08d' % int(d['date'])
+def parse_date_050910(raw):
+  mmddyyyy='%08d' % int(raw)
   return mmddyyyy
 
-def parse_date_06(d):
-  l=d['date'].split('-')
+def parse_date_06(raw):
+  l=raw.split('-')
   l.reverse()
   mmddyyyy=''.join(l)
   return mmddyyyy
 
-def parse_date_0708(d):
-  mmddyyyy=d['date']
+def parse_date_0708(raw):
+  mmddyyyy=raw
   return mmddyyyy
 
 def split_time(dateline,year):
