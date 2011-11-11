@@ -20,4 +20,7 @@ def split_time(dateline):
   }
 
 def parse_time_0304(dateline):
-  
+  pass
+
+if __name__ == "__main__":
+  test()
