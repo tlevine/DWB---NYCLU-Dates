@@ -7,3 +7,5 @@ for csv in data/20[01][0-9]/slice_[0-9]*.csv
   ./select-map.sh $csv
   echo finished $csv
 done
+
+./select-reduce.sh

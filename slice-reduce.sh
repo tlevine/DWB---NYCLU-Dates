@@ -5,4 +5,4 @@
 # except by checking the logs)
 
 #List of all headers
-cat data/20[01][0-9]/head.csv > headers.csv
+#cat data/20[01][0-9]/head.csv > headers.csv
