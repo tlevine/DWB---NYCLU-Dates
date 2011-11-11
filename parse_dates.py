@@ -2,11 +2,6 @@
 from datetime import datetime
 from pytz import timezone
 
-def test(year):
-  csv=open('time_format/%d' % year)
-  for line in csv:
-    parse_line(line,year)
-
 def parse_line(line,year):
   """Parse the date and time from a raw line of
   the csv file for a given year."""
@@ -34,7 +29,7 @@ def parse_datetime(raw,year):
   else:
     print 'fail'
 
-  print datetime_fromstring(mmddyyyy,hhmm)
+  return datetime_fromstring(mmddyyyy,hhmm)
 
 def datetime_fromstring(mmddyyyy,hhmm):
   """Create a datetime object with the appropriate time zone
@@ -84,5 +79,4 @@ def split_time(dateline,year):
   }
 
 if __name__ == "__main__":
-  for year in range(2003,2011):
-    test(year)
+  testyears()
