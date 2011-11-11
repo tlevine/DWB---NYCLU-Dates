@@ -1,9 +1,11 @@
 #!/usr/bin/env python
+from datetime import datetime
+from pytz import timezone
 
 def test(year):
   csv=open('time_format/%d' % year)
   for line in csv:
-    print parse_line(line,year)
+    parse_line(line,year)
 
 def parse_line(line,year):
   """Parse the date and time from a raw line of
@@ -13,15 +15,22 @@ def parse_line(line,year):
 
 def parse_date(raw,year):
   if year in (2003,2004):
-    return parse_date_0304(raw)
-  if year in (2005,2009,2010):
-    return parse_date_050910(raw)
-  if year==2006:
-    return parse_date_06(raw)
-  if year in (2007,2008):
-    return parse_date_0708(raw)
+    d=parse_date_0304(raw)
+  elif year in (2005,2009,2010):
+    d=parse_date_050910(raw)
+  elif year==2006:
+    d=parse_date_06(raw)
+  elif year in (2007,2008):
+    d=parse_date_0708(raw)
   else:
-    return raw
+    print 'fail'
+
+  print d
+
+  #Time zone
+  #year,month,day,hour,minute=d
+  year,month,day,hour,minute=[2004,3,5,3,1]
+  return datetime(year,month,day,hour,minute,tzinfo=timezone('EST'))
 
 def parse_date_0304(d):
   return d
