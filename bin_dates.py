@@ -9,10 +9,20 @@ def increment(d,key):
 
 def main():
   from json import dumps
-  f=open('datetime_bins.json')
-  json=dumps(extract())
+  d=extract()
+  
+  #JSON
+  json=dumps(d)
+  f=open('datetime_bins.json','w')
   f.write(json)
   f.close()
+
+  #CSV
+  for interval in ('hours','days'):
+    f=open('datetime_bins-%s.csv' % interval,'+')
+    for key in d[interval]:
+      f.write('%d,%d' % (key,d[interval][key])
+    f.close()
 
 def extract():
   hours={}
